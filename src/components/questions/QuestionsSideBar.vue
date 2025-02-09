@@ -10,7 +10,7 @@
       v-for="question in questions"
       :key="question.id"
       class="p-4"
-      :class="question.id === selectedQuestionID ? 'text-2xl font-bold' : 'text-md font-semibold'"
+      :class="question.id === selectedQuestionID ? 'text-xl font-bold' : 'text-md font-semibold'"
       @click="questionsStore.selectQuestion(question.id)"
     >
       {{ question.title }}
