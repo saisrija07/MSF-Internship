@@ -1,14 +1,13 @@
 <template>
   <button :class="['p-2 pl-6 pr-6 text-white rounded-md font-semibold text-xl',
     variants[variant] ?? 'default'
-  ]">
-    <slot></slot>
+  ]"
+  @click="$emit('click')">
+    <slot class="w-full h-full flex items-center justify-center"></slot>
   </button>
 </template>
 
 <script setup>
-
-import { defineProps,defineEmits } from 'vue';
 
 const variants = {
   'default':'bg-blue-900 hover:bg-blue-700',
@@ -24,6 +23,6 @@ defineProps({
   }
 })
 
-defineEmits
+defineEmits(['click'])
 
 </script>

@@ -1,20 +1,11 @@
 <template>
     <div class="flex p-4">
-      <QuestionsSideBar
-        :questions="db"
-      />
+      <QuestionsSideBar/>
       <QuestionDetails>
-        <template #heading>
-          {{ db.questions[0].title }}
-        </template>
-        <template #description>
-          {{  db.questions[0].description }}
-        </template>
         <template #buttons>
           <ButtonsContainer/>
         </template>
       </QuestionDetails>
-
   </div>
 </template>
 
@@ -22,6 +13,15 @@
 import QuestionsSideBar from "@/components/questions/QuestionsSideBar.vue";
 import QuestionDetails from "@/components/questions/QuestionDetails.vue";
 import ButtonsContainer from "@/components/questions/ButtonsContainer.vue";
+import { useQuestionsStore } from "@/stores/questionsStore";
+import { onMounted } from "vue";
+
+
+const questionsStore = useQuestionsStore();
+onMounted(() => {
+  if(questionsStore.questions.length == 0){
+    questionsStore.fetchQuestions()
+}})
 
 const db = {
     "questions": [

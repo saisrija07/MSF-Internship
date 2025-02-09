@@ -200,6 +200,46 @@
                     "output": "false"
                 }
             ]
+        },
+        {
+            "id": 11,
+            "title": "Anagram Check",
+            "description": "Check if two strings are anagrams",
+            "detailed description": "Given two strings, return whether they are anagrams.",
+            "constraints": "1 <= s.length, t.length <= 10^5, s and t consist of lowercase English letters",
+            "author": "SHRI",
+            "examples": [
+                {
+                    "id": 1,
+                    "input": "s = 'listen', t = 'silent'",
+                    "output": "true"
+                },
+                {
+                    "id": 2,
+                    "input": "s = 'rat', t = 'car'",
+                    "output": "false"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "title": "Anagram Check",
+            "description": "Check if two strings are anagrams",
+            "detailed description": "Given two strings, return whether they are anagrams.",
+            "constraints": "1 <= s.length, t.length <= 10^5, s and t consist of lowercase English letters",
+            "author": "SHRI",
+            "examples": [
+                {
+                    "id": 1,
+                    "input": "s = 'listen', t = 'silent'",
+                    "output": "true"
+                },
+                {
+                    "id": 2,
+                    "input": "s = 'rat', t = 'car'",
+                    "output": "false"
+                }
+            ]
         }
     ]
 }

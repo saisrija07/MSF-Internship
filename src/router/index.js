@@ -7,6 +7,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import QuestionView from '@/views/QuestionView.vue'
 import ConstestView from '@/views/ConstestView.vue'
 import NotFound from '@/views/NotFound.vue'
+import TrialView from '@/views/TrialView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +56,10 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: HomeView,
+    },
+    {
+      path:'/trial',
+      component:TrialView
     },
     {
       path: '/:pathMatch(.*)*',

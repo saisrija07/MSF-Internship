@@ -1,18 +1,19 @@
 <template>
   <div class="w-full">
-    <div class="flex-1 p-6">
+    <div  class="flex-1 p-6">
       <div class="bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-3xl font-bold mb-2">
-          <slot name="heading"></slot>
+        <div v-if="selectedQuestion">
+          <h1 class="text-3xl font-bold mb-2">
+          {{ selectedQuestion.title }}
         </h1>
         <p class="text-gray-700 mb-8 text-center text-lg">
-          <slot name="description"></slot>
+          {{ selectedQuestion['detailed description'] }}
         </p>
 
         <MultiCanvas>
           <template #heading> Examples </template>
           <template #content>
-            <MultiCard v-for="example in db.questions[0].examples" :key="example.id" class="mb-2 p-4">
+            <MultiCard v-for="example in selectedQuestion.examples" :key="example.id" class="mb-2 p-4">
               <template #default>
                 <span class="font-semibold">Input: </span>{{ example.input }} <br />
                 <span class="font-semibold">Output: </span>{{ example.output }}<br />
@@ -26,10 +27,17 @@
 
         <!-- Buttons -->
         <slot name="buttons" v-if="$slots.buttons"></slot>
+        </div>
+        <div v-else class="flex h-96 justify-center items-center">
+          <div v-if="isLoading" class="animate-spin">
+            <Loader class="w-8 h-8"/>
+          </div>
+          <h2 v-else>
+            Select a Question
+          </h2>
+        </div>
 
-        <!-- Constraints -->
-        <slot name="constraints" v-if="$slots.constraints"></slot>
-      </div>
+        </div>
     </div>
   </div>
 </template>
@@ -37,6 +45,13 @@
 <script setup>
 import MultiCanvas from '@/components/UI/MultiCanvas.vue'
 import MultiCard from '@/components/UI/MultiCard.vue'
+import { Loader } from 'lucide-vue-next';
+import { useQuestionsStore } from '@/stores/questionsStore';
+import { storeToRefs } from 'pinia';
+
+const questionsStore = useQuestionsStore();
+const { selectedQuestion,isLoading } = storeToRefs(questionsStore)
+
 
 const db = {
   questions: [

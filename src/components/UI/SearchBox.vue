@@ -9,7 +9,7 @@
         class="flex-1 outline-none p-2 text-gray-700 text-xl"
       />
       <!-- Search Icon/Button -->
-      <ButtonComp class="p-2 mr-2">
+      <ButtonComp class="mr-2 border" @click="$emit('search')">
           <template #default>
             <slot name="symbol"></slot>
           </template>
@@ -20,5 +20,7 @@
 
 <script setup>
 import ButtonComp from '@/components/UI/ButtonComp.vue';
+
+defineEmits(['search'])
 
 </script>

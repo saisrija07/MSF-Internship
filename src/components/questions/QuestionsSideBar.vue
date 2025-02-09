@@ -1,17 +1,35 @@
 <template>
-  <aside class="w-1/4 bg-white shadow-md p-4 overflow-y-auto h-screen">
+  <aside class="w-1/4 bg-white shadow-md p-4 overflow-y-auto h-screen rounded-lg">
     <h3 class="mb-5">Questions</h3>
 
-    <div v-if="db['questions'].length" class="grid gap-6">
-      <SingleCard v-for="question in db['questions']" :key="question.id" class="p-4 text-lg font-semibold">
-        {{ question.title }}
-      </SingleCard>
+    <div v-if="isLoading" class="grid gap-6">
+      <LoadingQuestions/>
     </div>
+    <div v-else class="grid gap-6">
+      <SingleCard
+      v-for="question in questions"
+      :key="question.id"
+      class="p-4"
+      :class="question.id === selectedQuestionID ? 'text-2xl font-bold' : 'text-md font-semibold'"
+      @click="questionsStore.selectQuestion(question.id)"
+    >
+      {{ question.title }}
+    </SingleCard>
+    </div>
+
   </aside>
 </template>
 
 <script setup>
 import SingleCard from '@/components/UI/SingleCard.vue';
+import { useQuestionsStore } from '@/stores/questionsStore';
+import { storeToRefs } from 'pinia';
+import LoadingQuestions from '@/components/questions/LoadingQuestions.vue';
+
+const questionsStore = useQuestionsStore();
+const { questions,isLoading,selectedQuestionID } = storeToRefs(questionsStore)
+
+// const
 
 const db = {
     "questions": [
