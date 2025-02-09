@@ -10,5 +10,4 @@
 
 
 // import MonacoEditor from 'monaco-editor-vue3';
-
 </script>

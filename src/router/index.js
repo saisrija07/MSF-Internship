@@ -8,6 +8,7 @@ import QuestionView from '@/views/QuestionView.vue'
 import ConstestView from '@/views/ConstestView.vue'
 import NotFound from '@/views/NotFound.vue'
 import TrialView from '@/views/TrialView.vue'
+import QuestionDetailsView from '@/views/QuestionDetailsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/questions',
       name: 'questions',
       component: QuestionView,
+    },
+    {
+      path:'/question-details',
+      name:'question-details',
+      component:QuestionDetailsView
     },
     {
       path: '/discuss',
