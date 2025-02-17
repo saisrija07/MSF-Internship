@@ -1,6 +1,6 @@
 <template>
-  <div class="p-4 flex justify-between items-center bg-gray-200">
-              <select class="p-2 border rounded-md">
+  <div class="p-4 flex justify-between items-center bg-gray-200 dark:bg-gray-700">
+              <select class="p-2 border rounded-md bg-gray-100 dark:bg-gray-800">
                 <option value="python">Python</option>
               </select>
               <div class="flex gap-4">

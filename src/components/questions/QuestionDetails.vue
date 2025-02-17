@@ -1,12 +1,12 @@
 <template>
   <div class="w-full">
     <div  class="flex-1 p-6">
-      <div class="bg-white p-6 rounded-lg shadow-md">
+      <div class="p-6 rounded-lg shadow-md bg-white dark:bg-black">
         <div v-if="selectedQuestion">
           <h1 class="text-3xl font-bold mb-2">
           {{ selectedQuestion.title }}
         </h1>
-        <p class="text-gray-700 mb-8 text-center text-lg">
+        <p class="mb-8 text-center text-lg text-gray-700 dark:text-gray-200">
           {{ selectedQuestion.description }}
         </p>
 
@@ -14,7 +14,6 @@
           <template #heading> Examples </template>
           <template #content>
             <MultiCard v-for="example in selectedQuestion.examples" :key="example.id" class="mb-2 p-4">
-
               <template #default>
                 <span class="font-semibold">Input: </span>{{ example.input }} <br />
                 <span class="font-semibold">Output: </span>{{ example.output }}<br />
@@ -52,7 +51,7 @@
           </h2>
         </div>
 
-        </div>
+      </div>
     </div>
   </div>
 </template>

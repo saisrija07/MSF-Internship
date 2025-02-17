@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-1/4 bg-white shadow-md p-4 overflow-y-auto h-screen rounded-lg">
+  <aside class="w-1/3 shadow-md p-4 overflow-y-auto h-screen rounded-lg dark:bg-black">
     <h3 class="mb-5">Questions</h3>
 
     <div v-if="isLoading" class="grid gap-6">
@@ -10,7 +10,7 @@
       v-for="question in questions"
       :key="question.id"
       class="p-4"
-      :class="question.id === selectedQuestionID ? 'text-xl font-bold' : 'text-md font-semibold'"
+      :class="question.id === selectedQuestionID ? 'text-2xl font-bold' : 'text-lg font-semibold'"
       @click="questionsStore.selectQuestion(question.id)"
     >
       {{ question.title }}
