@@ -9,7 +9,7 @@
         </div>
       </div>
 
-      <p class="mt-">
+      <p>
         <slot v-if="$slots.description" name="description"></slot>
       </p>
     </div>
