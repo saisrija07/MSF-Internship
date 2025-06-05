@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Dashboard - MediTrack Lite</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .welcome {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: #333;
+      text-align: center;
+    }
+
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .nav-buttons a {
+      display: block;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #45a049;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>MediTrack Lite - Patient Dashboard</h1>
+  </div>
+
+  <div class="container">
+    <div class="welcome">
+      Welcome, Patient! 👩‍⚕️<br>
+      Here are your options:
+    </div>
+
+    <div class="nav-buttons">
+      <a href="appointments.html">Book Appointment</a>
+      <a href="medical_records.html">View Medical Records</a>
+      <a href="prescriptions.html">Prescriptions</a>
+      <a href="reports.html">View Reports</a>
+      <a href="profile.html">Edit Profile</a>
+      <a href="1_login.html">Logout</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2025 MediTrack Lite. All rights reserved.
+  </div>
+
+</body>
+</html>
