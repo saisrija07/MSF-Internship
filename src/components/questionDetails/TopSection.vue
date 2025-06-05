@@ -4,7 +4,7 @@
                 <option value="python">Python</option>
               </select>
               <div class="flex gap-4">
-                <ButtonComp variant="green">Run</ButtonComp>
+                <ButtonComp variant="green" @click="$emit('run')">Run</ButtonComp>
                 <ButtonComp variant="blue">Submit</ButtonComp>
               </div>
             </div>
@@ -12,4 +12,10 @@
 
 <script setup>
 import ButtonComp from '@/components/UI/ButtonComp.vue';
+
+// defineProps({
+//   code: String
+// });
+
+defineEmits(['run']);
 </script>

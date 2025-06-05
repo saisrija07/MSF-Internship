@@ -10,8 +10,8 @@
       v-for="question in questions"
       :key="question.id"
       class="p-4"
-      :class="question.id === selectedQuestionID ? 'text-2xl font-bold' : 'text-lg font-semibold'"
-      @click="questionsStore.selectQuestion(question.id)"
+      :class="question.title === selectedQuestionID ? 'text-2xl font-bold' : 'text-lg font-semibold'"
+      @click="questionsStore.selectQuestion(question.title)"
     >
       {{ question.title }}
     </SingleCard>
