@@ -1,3 +1,3 @@
 <template>
-  Contests Page
+  Feedback
 </template>

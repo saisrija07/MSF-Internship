@@ -1,5 +1,5 @@
 <template>
-  <button :class="['p-2 pl-6 pr-6 text-white rounded-md font-semibold text-xl',
+  <button :class="['p-2 pl-6 pr-6 text-white rounded-md font-semibold text-2xl',
     variants[variant] ?? 'default'
   ]"
   @click="$emit('click')">
@@ -11,7 +11,7 @@
 
 const variants = {
   'default':'bg-blue-900 hover:bg-blue-700',
-  'green':'bg-green-500 hover:bg-green-400',
+  'green':'bg-green-900 hover:bg-green-700',
   'blue':'bg-blue-500 hover:bg-blue-400',
   'orange':'bg-orange-500 hover:bg-orange-400'
 }

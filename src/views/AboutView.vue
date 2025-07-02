@@ -3,66 +3,66 @@
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold">About Us</h2>
       <p class="mt-4">
-        Welcome to <span class="font-semibold">CodeFusion AI</span>,
-         the ultimate platform for coding enthusiasts, students, and professionals
-         to enhance their problem-solving skills.
-         Whether you're preparing for technical interviews, sharpening your algorithmic thinking,
-         or competing with fellow developers, we provide a seamless and engaging experience.
+        Welcome to <span class="font-semibold">QuickDeliverLite</span>,
+        your trusted partner in managing and streamlining last-mile deliveries.
+        Whether you're running a logistics company, managing freelance delivery agents,
+        or coordinating internal package transfers, our platform helps you operate efficiently and transparently.
       </p>
     </div>
 
     <div class="max-w-4xl mx-auto mt-8 grid gap-8 md:grid-cols-2">
       <TitleDescription>
         <template #title>
-          Extensive Problem Library
+          Seamless Delivery Tracking
         </template>
         <template #badge>
           <ScrollText />
         </template>
         <template #description>
-          Solve a variety of challenges across multiple domains.
+          Monitor all your deliveries in real-time with minimal effort.
         </template>
       </TitleDescription>
       <TitleDescription>
         <template #title>
-          Real-World Coding Practice
+          Smart Assignment System
         </template>
         <template #badge>
           <Globe />
         </template>
         <template #description>
-          Work on practical problems that mimic real scenarios.
+          Automatically assign the best available delivery agent for each task.
         </template>
       </TitleDescription>
       <TitleDescription>
         <template #title>
-          AI Code Analysis
+          Insightful Analytics
         </template>
         <template #badge>
           <Brain />
         </template>
         <template #description>
-          Get better code suggestions with AI
+          Make better decisions with performance reports and route efficiency insights.
         </template>
       </TitleDescription>
       <TitleDescription>
         <template #title>
-          Competitions & Leaderboard
+          Role-Based Access
         </template>
         <template #badge>
           <ShieldHalf />
         </template>
         <template #description>
-          Compete, climb the ranks, and showcase your skills.
+          Manage customers, drivers, and admins with tailored access control.
         </template>
       </TitleDescription>
     </div>
 
     <div class="text-center mt-8">
-      <p class="text-gray-700 font-medium">Join us and take your coding skills to the next level! 🚀</p>
+      <p class="text-gray-700 font-medium">Join QuickDeliverLite and optimize your delivery operations today! 🚚</p>
     </div>
   </section>
 </template>
+
 
 <script setup>
 import TitleDescription from '@/components/UI/TitleDescription.vue';

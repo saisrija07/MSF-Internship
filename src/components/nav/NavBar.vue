@@ -2,7 +2,7 @@
 <template>
   <div class="sticky top-0 flex">
     <div class="justify-start bg-gray-400">
-        <LogoComp class="ml-2"/>
+        <LogoComp class="ml-2 h-12 w-12"/>
     </div>
     <div class="flex w-full justify-center bg-gray-400">
         <RouterLink :to="{name:'home'}" active-class="active">
@@ -11,17 +11,11 @@
       <RouterLink :to="{name:'about'}" active-class="active">
         <NavItem -name="About"/>
       </RouterLink>
-      <RouterLink :to="{name:'questions'}" active-class="active">
-        <NavItem -name="Questions"/>
+      <RouterLink :to="{name:'delivery'}" active-class="active">
+        <NavItem -name="Delivery"/>
       </RouterLink>
-      <RouterLink :to="{name:'discuss'}" active-class="active">
-        <NavItem -name="Discuss"/>
-      </RouterLink>
-      <RouterLink :to="{name:'contests'}" active-class="active">
-        <NavItem -name="Contests"/>
-      </RouterLink>
-      <RouterLink :to="{name:'chat'}" active-class="active">
-        <NavItem -name="Chat"/>
+      <RouterLink :to="{name:'feedback'}" active-class="active">
+        <NavItem -name="Feedback"/>
       </RouterLink>
     </div>
     <button @click="themeStore.toggleTheme()" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">

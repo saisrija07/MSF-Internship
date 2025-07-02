@@ -1,90 +1,116 @@
 <template>
   <div class="flex items-center justify-center min-h-screen">
-    <MultiCard class="w-full max-w-md p-6 bg-white">
-      <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white">
-        {{ isLogin ? 'Login' : 'Sign Up' }}
-    </h2>
-    <form @submit.prevent="handleSubmit" class=" grid grid-cols-1 gap-4 mt-4">
-      <SingleCard v-if="!isLogin">
-          <input v-model="name" type="text" class="bg-inherit" placeholder="Name" required>
-      </SingleCard>
+    <MultiCard class="p-12 text-2xl grid grid-cols-1 w-[600px]">
+      <div class="flex justify-center mb-16">
+        <LogoComp class="h-32 w-32" />
+      </div>
+      <h2 class="text-3xl font-bold text-center mb-6">Register</h2>
+      <form @submit.prevent="handleRegister">
+        <SingleCard class="mb-6">
+          <input v-model="name" type="text" placeholder="Username"
+                 class="w-full px-4 py-2 border rounded-lg dark:text-black" required />
+        </SingleCard>
 
-      <SingleCard>
-        <input v-model="email" type="email" class="bg-inherit" placeholder="Email" required>
-      </SingleCard>
+        <SingleCard class="mb-6">
+          <input v-model="email" type="email" placeholder="Email"
+                 class="w-full px-4 py-2 border rounded-lg dark:text-black" required />
+        </SingleCard>
 
-      <SingleCard>
-        <input v-model="password" type="password" class="bg-inherit" placeholder="Password" required>
-      </SingleCard>
+        <SingleCard class="mb-6">
+          <input v-model="age" type="number" placeholder="Age" min = 0 max = 100
+                 class="w-full px-4 py-2 border rounded-lg dark:text-black" required />
+        </SingleCard>
 
-      <ButtonComp class="w-full">
-        {{ isLogin ? 'Login' : 'Sign Up' }}
-      </ButtonComp>
-    </form>
-    <p class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-        {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
-        <button @click="toggleForm" class="text-blue-500 hover:underline">
-          {{ isLogin ? 'Sign Up' : 'Login' }}
-        </button>
-    </p>
-  </MultiCard>
+        <!-- Gender Dropdown -->
+        <SingleCard class="mb-6">
+          <select v-model="gender"
+                  class="w-full px-4 py-2 border rounded-lg dark:text-black" required>
+            <option disabled value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="prefer_not_to_say">Prefer Not to Say</option>
+          </select>
+        </SingleCard>
 
-  </div>
+        <SingleCard class="mb-6">
+          <select v-model="role"
+                  class="w-full px-4 py-2 border rounded-lg dark:text-black" required>
+            <option disabled value="">Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="customer">Customer</option>
+            <option value="agent">Agent</option>
+          </select>
+        </SingleCard>
 
-  <div class="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-    <div class="w-full max-w-md p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-      <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white">
-        {{ isLogin ? 'Login' : 'Sign Up' }}
-      </h2>
+        <SingleCard class="mb-6">
+          <input v-model="password" type="password" placeholder="Password"
+                 class="w-full px-4 py-2 border rounded-lg dark:text-black" required />
+        </SingleCard>
 
-      <form @submit.prevent="handleSubmit" class="mt-4">
-        <div v-if="!isLogin">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-          <input v-model="name" type="text" class="input-field" placeholder="Enter your name" required>
-        </div>
+        <SingleCard class="mb-6">
+          <input v-model="phone" type="text" placeholder="Phone No"
+                 class="w-full px-4 py-2 border rounded-lg dark:text-black" required />
+        </SingleCard>
 
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-3">Email</label>
-        <input v-model="email" type="email" class="input-field" placeholder="Enter your email" required>
-
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-3">Password</label>
-        <input v-model="password" type="password" class="input-field" placeholder="Enter your password" required>
-
-        <button type="submit" class="btn-primary mt-4">
-          {{ isLogin ? 'Login' : 'Sign Up' }}
-        </button>
+        <ButtonComp class="w-full">
+          SIGN-UP
+        </ButtonComp>
       </form>
-
-      <p class="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-        {{ isLogin ? "Don't have an account?" : "Already have an account?" }}
-        <button @click="toggleForm" class="text-blue-500 hover:underline">
-          {{ isLogin ? 'Sign Up' : 'Login' }}
-        </button>
-      </p>
-    </div>
+    </MultiCard>
   </div>
 </template>
 
 <script setup>
+
 import ButtonComp from '@/components/UI/ButtonComp.vue';
+import LogoComp from '@/components/UI/LogoComp.vue';
 import MultiCard from '@/components/UI/MultiCard.vue';
-import SingleCard from '@/components/UI/SingleCard.vue';
+import SingleCard from '@/components/UI/SingleCard.vue'
+import apiClient from '@/api/axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const isLogin = ref(true);
-const name = ref('');
-const email = ref('');
-const password = ref('');
 
-const toggleForm = () => {
-  isLogin.value = !isLogin.value;
-};
+const router = useRouter();
 
-const handleSubmit = () => {
-  if (isLogin.value) {
-    console.log('Logging in with:', { email: email.value, password: password.value });
-  } else {
-    console.log('Signing up with:', { name: name.value, email: email.value, password: password.value });
+let name = ref('');
+let email = ref('');
+let age = ref('');
+let gender = ref('');
+let role = ref('');
+let phone = ref('');
+let password = ref('');
+
+const handleRegister = async () => {
+  const data = {
+    name: name.value,
+    email_address: email.value,
+    age: age.value,
+    gender: gender.value,
+    role: role.value,
+    password: password.value,
+    phone_number: phone.value
+  };
+
+  try {
+  const response = await apiClient.post('/auth/register', data);
+  console.log(response.data);
+
+  // Redirect to Login Page
+  alert('Registration Successful. Please Login');
+  router.push('/login');
+
+  } catch (error) {
+    if (error.response) {
+      console.error('Server responded with error:', error.response.data);
+    } else {
+      console.error('Network error:', error);
+    }
   }
-};
-</script>
 
+};
+
+
+
+</script>
