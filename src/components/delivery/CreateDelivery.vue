@@ -1,5 +1,6 @@
 <template>
   <MultiCard class="p-12 text-2xl grid grid-cols-1 w-[600px]">
+    <CloseButton @close="$emit('cancel')"/>
     <div class="flex justify-center mb-12">
       <LogoComp class="h-32 w-32" />
     </div>
@@ -46,12 +47,9 @@
         />
       </SingleCard>
 
-      <div class="grid grid-cols-2 gap-6">
+      <div class="flex items-center justify-center">
         <ButtonComp type="submit" class="w-full" variant="orange">Create Delivery</ButtonComp>
-        <ButtonComp @click="emit('cancel')" class="w-full" variant="green">Cancel</ButtonComp>
       </div>
-
-
     </form>
   </MultiCard>
 </template>
@@ -64,9 +62,8 @@ import SingleCard from '@/components/UI/SingleCard.vue';
 import ButtonComp from '@/components/UI/ButtonComp.vue';
 import LogoComp from '@/components/UI/LogoComp.vue';
 import { defineEmits } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
+import CloseButton from '@/components/UI/CloseButton.vue';
+import { useNotifications } from '@/composables/useNotifications';
 
 const pickup = ref('');
 const drop = ref('');
@@ -74,6 +71,7 @@ const desc = ref('');
 const phone = ref('');
 
 const emit = defineEmits(['cancel']);
+const { addNotification } = useNotifications();
 
 const createDelivery = async () => {
   const data = {
@@ -85,13 +83,12 @@ const createDelivery = async () => {
 
   try {
     await apiClient.post('/deliveries/', data);
-    alert('Delivery created successfully!');
-    pickup.value = drop.value = desc.value = phone.value = '';
+    addNotification('Delivery created successfully!');
     emit('cancel');
 
   } catch (err) {
     console.error('Error:', err.response?.data || err.message);
-    alert('Failed to create delivery.');
+    addNotification('Failed to create delivery.');
   }
 };
 </script>

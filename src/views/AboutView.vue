@@ -1,9 +1,9 @@
 <template>
   <section class="py-12 px-6 h-screen">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold">About Us</h2>
-      <p class="mt-4">
-        Welcome to <span class="font-semibold">QuickDeliverLite</span>,
+      <h2>About Us</h2>
+      <p class="mt-4 text-md">
+        Welcome to <span class="font-bold">QuickDeliverLite</span>,
         your trusted partner in managing and streamlining last-mile deliveries.
         Whether you're running a logistics company, managing freelance delivery agents,
         or coordinating internal package transfers, our platform helps you operate efficiently and transparently.
@@ -58,7 +58,7 @@
     </div>
 
     <div class="text-center mt-8">
-      <p class="text-gray-700 font-medium">Join QuickDeliverLite and optimize your delivery operations today! 🚚</p>
+      <p class=" text-xl font-semibold text-gray-700 dark:text-gray-300">Join QuickDeliverLite and optimize your delivery operations today! 🚚</p>
     </div>
   </section>
 </template>

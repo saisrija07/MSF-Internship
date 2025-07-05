@@ -1,49 +1,54 @@
 <template>
   <!-- Delivery Cards -->
-  <MultiCard v-if="deliveries.length > 0" class="p-12">
+  <MultiCard class="p-12">
     <h2> My Orders </h2>
-    <div class="grid gap-8 grid-cols-3 mt-4">
-      <SingleCard
-        v-for="delivery in deliveries"
-        :key="delivery.id"
-        class="p-4 border rounded-lg shadow grid grid-cols-1 gap-2 cursor-pointer text-xl"
-        @click="showDelivery(delivery.id)"
-      >
-        <p><strong>ID:</strong> {{ delivery.id }}</p>
-        <p><strong>Pickup:</strong> {{ delivery.pickup_location }}</p>
-        <p><strong>Drop:</strong> {{ delivery.drop_location }}</p>
-        <p><strong>Status:</strong> {{ delivery.status ? capitalize(delivery.status) : 'Pending' }}</p>
-      </SingleCard>
+    <div v-if="!loading">
+      <div v-if="deliveries.length > 0" class="grid gap-8 grid-cols-3 mt-4">
+        <SingleCard
+          v-for="delivery in deliveries"
+          :key="delivery.id"
+          class="p-4 grid grid-cols-1 gap-2 cursor-pointer text-xl"
+          @click="showDelivery(delivery.id)"
+        >
+          <p><strong>ID:</strong> {{ delivery.id }}</p>
+          <p><strong>Pickup:</strong> {{ delivery.pickup_location }}</p>
+          <p><strong>Drop:</strong> {{ delivery.drop_location }}</p>
+          <p><strong>Status:</strong> {{ delivery.status ? capitalize(delivery.status) : 'Pending' }}</p>
+        </SingleCard>
+      </div>
+      <div v-else class="flex items-center p-6 text-xl font-bold">
+        No deliveries currently!
+      </div>
+      <div class="flex justify-center items-center mt-8">
+      <ButtonComp @click="showForm" class="flex items-center gap-2">
+        <Plus />
+        <span>Create New</span>
+      </ButtonComp>
+    </div>
+    </div>
+    <div v-else>
+      <div class="grid gap-8 grid-cols-3 mt-4">
+          <OrdersLoading/>
+          <OrdersLoading/>
+          <OrdersLoading/>
+      </div>
+      <div class="flex justify-center items-center mt-8">
+        <ButtonLoading class=" w-[210px] h-12"/>
+      </div>
     </div>
   </MultiCard>
 
-  <SingleCard v-else class="p-6 text-3xl font-bold">
-    No deliveries currently!
-  </SingleCard>
+  <div v-if="showing" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="relative w-full h-full overflow-auto flex justify-center items-start pt-16">
+      <CreateDelivery @cancel="closeForm"/>
+    </div>
+  </div>
 
-  <!-- Popup Modal -->
+  <!-- Popup -->
   <div v-if="selectedDelivery" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-    <MultiCard class="p-8 w-[600px] text-xl leading-loose">
-      <h2 class="text-3xl font-bold mb-4 ">Delivery Details</h2>
-      <p><strong>ID:</strong> {{ selectedDelivery.id }}</p>
-      <p><strong>Pickup:</strong> {{ selectedDelivery.pickup_location }}</p>
-      <p><strong>Drop:</strong> {{ selectedDelivery.drop_location }}</p>
-      <p><strong>Item:</strong> {{ selectedDelivery.item_description }}</p>
-      <p><strong>Phone:</strong> {{ selectedDelivery.phone_number }}</p>
-      <p><strong>Request Time: </strong> {{ formatDate(selectedDelivery.requested_at) || 'NA' }}</p>
-      <p><strong>Delivered:</strong> {{ selectedDelivery.delivered_at || 'NA' }}</p>
-      <p><strong>Status:</strong> {{ selectedDelivery.status ? capitalize(selectedDelivery.status) : 'Pending' }}</p>
-
-      <GiveFeedback :del="selectedDelivery" :useClose="close" v-if="selectedDelivery.status === 'delivered'"/>
-      <ButtonComp
-        @click="close"
-        class="mt-4 px-4 py-2"
-        variant="orange"
-      >
-        Close
-      </ButtonComp>
-
-    </MultiCard>
+    <DeliveryDetails :selectedDelivery="selectedDelivery" :close="close">
+      <GiveFeedback :del="selectedDelivery" :close="close" v-if="selectedDelivery.status === 'delivered'"/>
+    </DeliveryDetails>
   </div>
 </template>
 
@@ -54,29 +59,23 @@ import MultiCard from '@/components/UI/MultiCard.vue';
 import SingleCard from '@/components/UI/SingleCard.vue';
 import ButtonComp from '@/components/UI/ButtonComp.vue';
 import GiveFeedback from '@/components/feedback/GiveFeedback.vue';
+import OrdersLoading from '@/components/UI/Loading/OrdersLoading.vue';
+import DeliveryDetails from './DeliveryDetails.vue';
+import { Plus } from 'lucide-vue-next';
+import CreateDelivery from '@/components/delivery/CreateDelivery.vue';
+import ButtonLoading from '../UI/Loading/ButtonLoading.vue';
 
 const deliveries = ref([]);
 const selectedDelivery = ref(null);
-const feedbackOption = ref(false);
 
-const formatDate = (time) => {
-  const cleanedTime = time.split('.')[0] + 'Z'; // Append Z to explicitly indicate UTC
-  const date = new Date(cleanedTime);
-
-  return date.toLocaleString('en-IN', {
-    timeZone: 'Asia/Kolkata',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
-};
+const loading = ref(false);
 
 const showAll = async () => {
+  loading.value = true;
   const response = await apiClient.get('/deliveries/customer');
+  console.log(response.data)
   deliveries.value = response.data['deliveries'];
+  loading.value = false;
 };
 
 const showDelivery = async (id) => {
@@ -87,14 +86,20 @@ const showDelivery = async (id) => {
 
 const close = () => {
   selectedDelivery.value = null;
-  console.log("CLOSED")
 }
 
-const openFeedback = () => {
-  feedbackOption.value = true;
-}
+const showing = ref(false);
+
+const showForm = () => {
+  showing.value = true;
+};
+
+const closeForm = () => {
+  showing.value = false;
+};
 
 onMounted(() => {
   showAll();
 });
+
 </script>

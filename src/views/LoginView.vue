@@ -33,8 +33,10 @@ import MultiCard from '@/components/UI/MultiCard.vue';
 import SingleCard from '@/components/UI/SingleCard.vue'
 import apiClient from '@/api/axios';
 import { useRouter } from 'vue-router';
+import { useNotifications } from '@/composables/useNotifications';
 
 const router = useRouter();
+const { addNotification } = useNotifications();
 
 let email = '';
 let password = '';
@@ -59,22 +61,21 @@ const handleLogin = async () => {
   localStorage.setItem('role', role);
 
   // Go to home
-  alert('Login Successful');
+  // alert('Login Successful');
+  addNotification("Login Successful");
+
   router.push('/');
 
   } catch (error) {
     if (error.response) {
       if (error.response.status === 401) {
-        alert('Invalid email or password');
+        addNotification("Invalid Username or Password");
       } else {
-        alert(`Error: ${error.response.data.detail || 'Something went wrong'}`);
+        addNotification('Something went wrong');
       }
     } else {
-      alert('Network error. Please try again.');
+      addNotification('Network error. Please try again.');
     }
   }
 };
-
-
-
 </script>

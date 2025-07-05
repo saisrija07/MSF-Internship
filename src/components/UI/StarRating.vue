@@ -3,8 +3,8 @@
     <span
       v-for="n in 5"
       :key="n"
-      @click="$emit('update:modelValue', n)"
-      class="cursor-pointer transition-colors"
+      class="transition-colors"
+      :class="disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'"
     >
       <Star
         class="w-8 h-8"
@@ -13,6 +13,7 @@
         :class="n <= modelValue
           ? 'text-red-700 dark:text-yellow-400'
           : 'text-gray-500 dark:text-white'"
+        @click="!disabled && $emit('update:modelValue', n)"
       />
     </span>
   </div>
@@ -23,5 +24,9 @@ import { Star } from 'lucide-vue-next';
 
 defineProps({
   modelValue: Number,
+  disabled: {
+    type: Boolean,
+    default: false
+  }
 });
 </script>

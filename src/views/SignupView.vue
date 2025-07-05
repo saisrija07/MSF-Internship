@@ -70,9 +70,10 @@ import SingleCard from '@/components/UI/SingleCard.vue'
 import apiClient from '@/api/axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-
+import { useNotifications } from '@/composables/useNotifications';
 
 const router = useRouter();
+const { addNotification } = useNotifications();
 
 let name = ref('');
 let email = ref('');
@@ -98,7 +99,7 @@ const handleRegister = async () => {
   console.log(response.data);
 
   // Redirect to Login Page
-  alert('Registration Successful. Please Login');
+  addNotification('Registration Successful. Please Login')
   router.push('/login');
 
   } catch (error) {

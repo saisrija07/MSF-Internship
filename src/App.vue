@@ -4,6 +4,7 @@
   <div>
     <RouterView/>
   </div>
+  <NotificationList/>
 </template>
 
 <script setup>
@@ -11,6 +12,7 @@ import { RouterView } from 'vue-router'
 import NavBar from '@/components/nav/NavBar.vue';
 
 import { useThemeStore } from "@/stores/useThemeStore";
+import NotificationList from '@/components/UI/NotificationList.vue';
 
 const themeStore = useThemeStore();
 

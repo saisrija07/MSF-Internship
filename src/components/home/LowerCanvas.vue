@@ -39,7 +39,7 @@ const allUsers = async () => {
 const curUser = async () => {
   const userId = localStorage.getItem('user_id');
   const response = await apiClient.get(`/user/${userId}`);
-  content.value = "Logged in as:\t" + response.data.name + "\tRole:\t" + response.data.role + "\tPhoneNo:\t" + response.data.phone_number;
+  content.value = "Logged in as:\t" + response.data.name + "\tRole:\t" + response.data.role + "\tID:\t" + response.data.id;
 }
 
 </script>
