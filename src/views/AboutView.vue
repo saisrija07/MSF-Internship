@@ -1,5 +1,5 @@
 <template>
-  <section class="py-12 px-6 h-screen">
+  <section class="py-12 px-6">
     <div class="max-w-4xl mx-auto text-center">
       <h2>About Us</h2>
       <p class="mt-4 text-md">
@@ -57,14 +57,16 @@
       </TitleDescription>
     </div>
 
-    <div class="text-center mt-8">
+    <div class="text-center mt-5">
       <p class=" text-xl font-semibold text-gray-700 dark:text-gray-300">Join QuickDeliverLite and optimize your delivery operations today! 🚚</p>
     </div>
   </section>
+  <TestimonialsPart class=" h-[350px]"/>
 </template>
 
 
 <script setup>
+import TestimonialsPart from '@/components/about/TestimonialsPart.vue';
 import TitleDescription from '@/components/UI/TitleDescription.vue';
 import { Globe } from 'lucide-vue-next';
 import { ScrollText } from 'lucide-vue-next';

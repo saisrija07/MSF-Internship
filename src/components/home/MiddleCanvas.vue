@@ -1,17 +1,18 @@
 <template>
   <div class="flex flex-col w-full h-screen p-4" >
-      <h1 class="mt-12">
-        Welcome
+    <LogoComp class="mx-auto my-auto w-32 h-32 mt-2"/>
+      <h1 class="mt-4">
+        Welcome To QUICK DELIVER LITE
       </h1>
-      <div class="h-auto mt-24">
-        <h3 class="text-center text-2xl ">Search Something</h3>
+
+      <div class="h-auto mt-6">
         <SearchBox class="mt-5 w-full">
           <template #symbol>
             <Search/>
           </template>
         </SearchBox>
       </div>
-      <div class="flex mt-8 flex-grow">
+      <div class="flex mt-8 flex-grow w-full">
         <LowerCanvas/>
       </div>
   </div>
@@ -21,4 +22,5 @@
 import { Search } from 'lucide-vue-next';
 import LowerCanvas from '@/components/home/LowerCanvas.vue';
 import SearchBox from '@/components/UI/SearchBox.vue';
+import LogoComp from '../UI/LogoComp.vue';
 </script>

@@ -30,12 +30,12 @@ const router = createRouter({
       component: DeliveryView,
       meta: {requiresAuth: true}
     },
-    {
-      path: '/feedback',
-      name: 'feedback',
-      component: FeedbackView,
-      meta: {requiresAuth: true}
-    },
+    // {
+    //   path: '/feedback',
+    //   name: 'feedback',
+    //   component: FeedbackView,
+    //   meta: {requiresAuth: true}
+    // },
     {
       path: '/profile',
       name: 'profile',

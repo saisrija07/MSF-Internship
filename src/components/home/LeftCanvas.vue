@@ -12,7 +12,6 @@
 
 <script setup>
 import MultiCard from '@/components/UI/MultiCard.vue';
-import StatsCard from '@/components/stats/StatsCard.vue';
 import AgentStats from '../stats/AgentStats.vue';
 import CustomerStats from '@/components/stats/CustomerStats.vue';
 

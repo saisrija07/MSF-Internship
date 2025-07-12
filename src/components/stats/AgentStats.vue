@@ -9,7 +9,7 @@
       </span>
     </template>
   </StatsCard>
-  <StatsLoading v-else/>
+  <StatsLoading v-else class=" h-[240px]"/>
 
   <StatsCard v-if="!loadingRating">
     <template #heading>{{ rating }}</template>
@@ -18,7 +18,7 @@
     <template #subheading>Average Rating</template>
     <template #description>Agents with better rating get special benefits !!</template>
   </StatsCard>
-  <StatsLoading v-else />
+  <StatsLoading v-else class=" h-[242px]" />
 
   <StatsCard v-if="!loadingAgentDel">
     <template #heading>{{ driver_deliveries }}</template>
@@ -29,7 +29,7 @@
       </span>
     </template>
   </StatsCard>
-  <StatsLoading v-else />
+  <StatsLoading v-else class=" h-[242px]" />
 </template>
 
 
@@ -52,20 +52,10 @@ const driver_deliveries = ref(0);
 
 // For fictional purpose only. To be changed with actual API call
 const getTotalDeliveries = async () => {
-  try {
-    loadingTotalDel.value = true;
-    await new Promise(resolve => {
-      setTimeout(() => {
-        total_deliveries.value = 1234;
-        resolve();
-      }, 3000);
-    });
-
-    loadingTotalDel.value = false;
-  } catch (error) {
-    console.log(error);
-    getTotalDeliveries();
-  }
+  loadingTotalDel.value = true;
+  const response = await apiClient.get('/app-stats');
+  total_deliveries.value = response.data['total_deliveries'];
+  loadingTotalDel.value = false;
 };
 
 const getRating = async () => {

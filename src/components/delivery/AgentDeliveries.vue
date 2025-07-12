@@ -8,7 +8,7 @@
           <SingleCard
             v-for="delivery in pending_deliveries"
             :key="delivery.id"
-            class="p-4 grid grid-cols-1 gap-2 text-xl"
+            class="p-4 grid grid-cols-1 gap-2 text-xl !bg-blue-200 dark:!bg-blue-700"
             @click="showDelivery(delivery.id)"
           >
             <p><strong>ID:</strong> {{ delivery.id }}</p>
@@ -36,6 +36,20 @@
             v-for="delivery in my_deliveries"
             :key="delivery.id"
             class="p-4 grid grid-cols-1 gap-2 cursor-pointer text-xl"
+            :class="{
+                '!bg-blue-200': delivery.status === 'pending',
+                'dark:!bg-blue-700': delivery.status === 'pending',
+
+                '!bg-green-200': delivery.status === 'accepted',
+                'dark:!bg-green-700': delivery.status === 'accepted',
+
+                '!bg-yellow-200': delivery.status === 'in-transit',
+                'dark:!bg-yellow-700': delivery.status === 'in-transit',
+
+                '!bg-red-200': delivery.status === 'delivered',
+                'dark:!bg-red-700': delivery.status === 'delivered'
+            }"
+
             @click="showDelivery(delivery.id)"
           >
             <p><strong>ID:</strong> {{ delivery.id }}</p>
@@ -90,6 +104,7 @@ const selectedDelivery = ref(null);
 const showPending = async () => {
   loadingPending.value = true;
   const response = await apiClient.get('/deliveries/pending');
+  console.log(response.data);
   pending_deliveries.value = response.data['Pending deliveries'];
   loadingPending.value = false;
 };

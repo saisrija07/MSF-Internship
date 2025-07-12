@@ -3,11 +3,24 @@
   <MultiCard class="p-12">
     <h2> My Orders </h2>
     <div v-if="!loading">
-      <div v-if="deliveries.length > 0" class="grid gap-8 grid-cols-3 mt-4">
+      <div v-if="deliveries.length > 0" class="grid gap-8 grid-cols-4 mt-4">
         <SingleCard
           v-for="delivery in deliveries"
           :key="delivery.id"
           class="p-4 grid grid-cols-1 gap-2 cursor-pointer text-xl"
+          :class="{
+                '!bg-blue-200': delivery.status === 'pending',
+                'dark:!bg-blue-700': delivery.status === 'pending',
+
+                '!bg-green-200': delivery.status === 'accepted',
+                'dark:!bg-green-700': delivery.status === 'accepted',
+
+                '!bg-yellow-200': delivery.status === 'in-transit',
+                'dark:!bg-yellow-700': delivery.status === 'in-transit',
+
+                '!bg-red-200': delivery.status === 'delivered',
+                'dark:!bg-red-700': delivery.status === 'delivered'
+            }"
           @click="showDelivery(delivery.id)"
         >
           <p><strong>ID:</strong> {{ delivery.id }}</p>
@@ -80,6 +93,7 @@ const showAll = async () => {
 
 const showDelivery = async (id) => {
   // const response = await apiClient.get(`/deliveries/${id}`); // slight delay
+  // console.log(response.data)
   const sel = deliveries.value.find((delivery) => delivery.id === id); // fast
   selectedDelivery.value = sel;
 };

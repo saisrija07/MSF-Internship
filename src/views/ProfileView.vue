@@ -52,7 +52,7 @@ const getProfile = async () => {
   const response = await apiClient.get('/auth/me');
   console.log(response.data);
   user.value = response.data;
-  initials.value = user.value.email_address[0].toUpperCase();
+  initials.value = user.value.name[0].toUpperCase();
 }
 
 let copied = ref(false);

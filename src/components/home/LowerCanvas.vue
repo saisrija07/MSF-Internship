@@ -1,45 +1,47 @@
 <template>
-  <MultiCard class="w-full">
-    <button @click="curUser" class="text-2xl text-blue-800 font-bold"> See who's working</button><br>
-    <button @click="allUsers" class="text-2xl text-blue-800 font-bold"> All users </button>
+  <MultiCard class="w-full p-6 bg-white rounded-lg shadow-md mx-auto">
+    <h2 class="mb-5">
+      Our Delivery in Motion
+    </h2>
 
-    <p class="text-xl font-semibold text-gray-800">
-      {{ content }}
-    </p>
+    <div class="grid grid-cols-2 grid-rows-4 gap-4">
+      <div class="row-span-4 rounded-xl shadow h-[410px]">
+        <img
+          :src="role === 'customer' ? '/src/assets/static/C_1.png' : '/src/assets/static/D_1.png'"
+          alt="App Screenshot 1"
+          class="w-full h-full"
+        />
+      </div>
 
-    <ul v-if="users.length > 0" class="text-xl font-semibold text-gray-800 list-disc ml-6">
-      <li v-for="user in users" :key="user.user_id">
-        {{ user }}
-      </li>
-    </ul>
+      <div class="col-start-2 row-span-2 rounded-lg shadow h-[200px]">
+        <img
+          :src="role === 'customer' ? '/src/assets/static/C_2.png' : '/src/assets/static/D_2.png'"
+          alt="App Screenshot 2"
+          class="w-full h-full"
+        />
+      </div>
 
+      <div class="col-start-2 row-span-2 row-start-3 rounded-lg shadow h-[200px]">
+        <img
+          src="/src/assets/static/img_1.png"
+          alt="AI Delivery 1"
+          class="w-full h-full"
+        />
+      </div>
+
+      <div class="col-span-2 row-start-5 rounded-lg shadow h-[300px]">
+        <img
+          src="/src/assets/static/img_2.png"
+          alt="AI Delivery 2"
+          class="w-full h-full"
+        />
+      </div>
+    </div>
   </MultiCard>
-
 </template>
 
 <script setup>
 import MultiCard from '@/components/UI/MultiCard.vue';
-import apiClient from '@/api/axios';
-import { ref } from 'vue';
-
-const content = ref('');
-const users = ref([]);
-
-const allUsers = async () => {
-  try {
-    const response = await apiClient.get('/read_all_users');
-    users.value = response.data;
-  } catch (err) {
-    console.error('Error fetching all users:', err.response?.data || err.message);
-    content.value = "INTERNAL SERVER ERROR"
-  }
-};
-
-
-const curUser = async () => {
-  const userId = localStorage.getItem('user_id');
-  const response = await apiClient.get(`/user/${userId}`);
-  content.value = "Logged in as:\t" + response.data.name + "\tRole:\t" + response.data.role + "\tID:\t" + response.data.id;
-}
+const role = localStorage.getItem('role');
 
 </script>

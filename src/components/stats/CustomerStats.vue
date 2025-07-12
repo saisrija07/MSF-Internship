@@ -9,7 +9,7 @@
       </span>
     </template>
   </StatsCard>
-  <StatsLoading v-else/>
+  <StatsLoading v-else class=" h-[240px]"/>
 
   <StatsCard v-if="!loadingCustomerFeed">
     <template #heading>{{ customer_feedbacks }}</template>
@@ -20,18 +20,18 @@
       </span>
     </template>
   </StatsCard>
-  <StatsLoading v-else/>
+  <StatsLoading v-else class=" h-[242px]"/>
 
   <StatsCard v-if="!loadingCustomerDel">
     <template #heading>{{ customer_deliveries }}</template>
     <template #subheading>Total Orders</template>
     <template #description>
       <span>
-        You have ordered from us <strong class=" text-lg">{{ customer_deliveries }}</strong> times. Thank You for trusting us for your needs. <br>We stay committed in delivering your orders safely and securely !!
+        You have ordered from us <strong class=" text-lg">{{ customer_deliveries }}</strong> times. <br>Thank You for trusting us for your needs. <br>We stay committed in delivering your orders Safely and Securely !!
       </span>
     </template>
   </StatsCard>
-  <StatsLoading v-else/>
+  <StatsLoading v-else class=" h-[242px]"/>
 
 </template>
 
@@ -52,22 +52,11 @@ const total_deliveries = ref(0);
 const customer_feedbacks = ref(0);
 const customer_deliveries = ref(0);
 
-// For fictional purpose only. To be changed with actual API call
 const getTotalDeliveries = async () => {
-  try {
-    loadingTotalDel.value = true;
-    await new Promise(resolve => {
-      setTimeout(() => {
-        total_deliveries.value = 1234;
-        resolve();
-      }, 3000);
-    });
-
-    loadingTotalDel.value = false;
-  } catch (error) {
-    console.log(error);
-    getTotalDeliveries();
-  }
+  loadingTotalDel.value = true;
+  const response = await apiClient.get('/app-stats');
+  total_deliveries.value = response.data['total_deliveries'];
+  loadingTotalDel.value = false;
 };
 
 

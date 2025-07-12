@@ -5,7 +5,6 @@
     <p><strong>ID:</strong> {{ props.selectedDelivery.id }}</p>
     <p><strong>Pickup:</strong> {{ props.selectedDelivery.pickup_location }}</p>
     <p><strong>Drop:</strong> {{ props.selectedDelivery.drop_location }}</p>
-    <p><strong>Item:</strong> {{ props.selectedDelivery.item_description }}</p>
     <p><strong>Phone:</strong> {{ props.selectedDelivery.phone_number }}</p>
     <p><strong>Request Time: </strong> {{ props.selectedDelivery.requested_at ? formatDate(props.selectedDelivery.requested_at) : 'NA' }}</p>
     <p><strong>Delivered:</strong> {{ props.selectedDelivery.delivered_at ? formatDate(props.selectedDelivery.delivered_at) : 'NA' }}</p>

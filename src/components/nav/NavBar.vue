@@ -14,9 +14,9 @@
       <RouterLink :to="{name:'delivery'}" active-class="active">
         <NavItem -name="Delivery"/>
       </RouterLink>
-      <RouterLink :to="{name:'feedback'}" active-class="active">
+      <!-- <RouterLink :to="{name:'feedback'}" active-class="active">
         <NavItem -name="Feedback"/>
-      </RouterLink>
+      </RouterLink> -->
     </div>
     <button @click="themeStore.toggleTheme()" class="p-2 rounded-lg bg-gray-50 dark:bg-gray-900 text-3xl">
     {{ themeStore.darkMode ? "🌙" : "☀️" }}
